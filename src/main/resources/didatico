@@ -118,3 +118,13 @@
    }
 
    \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+                                 ADICIONANDO PARAMETRO GLOBALMENTE EM DOCUMENTAÇÂO
+
+      .globalRequestParameters(Arrays.asList(
+         new RequestParameterBuilder()
+            .name("campos")
+            .description("Nomes das propriedades para filtrar na resposta, separados por virgula")
+            .in(ParameterType.QUERY)
+            .required(true)
+            .query(q -> q.model(m -> m.scalarModel(ScalarType.STRING)))
+            .build()))

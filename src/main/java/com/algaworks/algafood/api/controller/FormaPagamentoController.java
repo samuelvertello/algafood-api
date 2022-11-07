@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
 import com.algaworks.algafood.api.assembler.FormaPagamentoInputDisassembler;
 import com.algaworks.algafood.api.assembler.FormaPagamentoModelAssembler;
+import com.algaworks.algafood.api.controller.openapi.controller.FormaPagamentoControllerOpenApi;
 import com.algaworks.algafood.api.model.FormaPagamentoModel;
 import com.algaworks.algafood.api.model.input.FormaPagamentoInput;
 import com.algaworks.algafood.domain.model.FormaPagamento;
@@ -31,8 +33,8 @@ import com.algaworks.algafood.domain.repository.FormaPagamentoRepository;
 import com.algaworks.algafood.domain.service.CadastroFormaPagamentoService;
 
 @RestController
-@RequestMapping(value = "/formasPagamentos")
-public class FormaPagamentoController {
+@RequestMapping(value = "/formasPagamentos", produces = MediaType.APPLICATION_JSON_VALUE)
+public class FormaPagamentoController implements FormaPagamentoControllerOpenApi{
    
    @Autowired
    private FormaPagamentoRepository formaPagamentoRepository;
@@ -72,7 +74,7 @@ public class FormaPagamentoController {
             .body(formasPagamentoModel);
    }
 
-   @GetMapping("/{formaPagamentoId}")
+   @GetMapping(value = "/{formaPagamentoId}")
    public ResponseEntity<FormaPagamentoModel> buscar(
             @PathVariable Long formaPagamentoId, ServletWebRequest request) {
                
@@ -107,7 +109,7 @@ public class FormaPagamentoController {
       return formaPagamentoModelAssembler.toModel(formaPagamento);
    }
 
-   @PutMapping("/{formaPagamentoId}")
+   @PutMapping(value = "/{formaPagamentoId}")
    public FormaPagamentoModel atualizar(@PathVariable Long formaPagamentoId, 
          @RequestBody @Valid FormaPagamentoInput formaPagamentoInput) {
 

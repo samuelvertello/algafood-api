@@ -35,7 +35,8 @@ build/
 src/main/resources/application-configs.properties
 src/main/resource
 src/main/resource/didatico
-src/algafood-api.jar
-src/HELP.md
-src/mvnw
-src/mvnw.cmd
+algafood-api.jar
+HELP.md
+mvnw
+mvnw.cmd
+gitignore
