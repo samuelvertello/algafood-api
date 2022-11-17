@@ -20,6 +20,8 @@ import org.springframework.util.StringUtils;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.repository.RestauranteRepository;
 import com.algaworks.algafood.domain.repository.RestauranteRepositoryQuery;
+
+
 import static com.algaworks.algafood.infrastructure.repository.spec.RestauranteSpecs.*;
 
 @Repository

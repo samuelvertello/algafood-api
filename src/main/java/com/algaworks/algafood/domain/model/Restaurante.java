@@ -76,7 +76,7 @@ public class Restaurante {
     @JoinTable(name = "restaurante_usuario_responsavel", 
         joinColumns = @JoinColumn(name = "restaurante_id"), 
         inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-    private Set<Usuario> usuarios = new HashSet<>();
+    private Set<Usuario> usuarioResposavel = new HashSet<>();
 
     public void ativar() {
         setAtivo(true);
@@ -93,7 +93,34 @@ public class Restaurante {
     public void fechar() {
         setAberto(false);
     }
+    
+    public boolean isAberto() {
+        return this.aberto;
+    }
+    public boolean isFechado() {
+        return !isAberto();
+    }
+    public boolean isAtivo() {
+        return this.ativo;
+    }
+    public boolean isInativo() {
+        return !isAtivo();
+    }
 
+    public boolean permitidoAbertura() {
+        return isAtivo() && isFechado();
+    }
+    public boolean permitidoAtivacao() {
+        return isInativo();
+    }
+    public boolean permitidoInativacao() {
+        return isAtivo();
+    }
+    public boolean permitidoFechamento() {
+        return isAberto();
+    }
+
+    
     public boolean removerFormaPagamento(FormaPagamento formaPagamento) {
         return getFormasPagamento().remove(formaPagamento);
     }
@@ -102,12 +129,12 @@ public class Restaurante {
         return getFormasPagamento().add(formaPagamento);
     }
 
-    public void adicionarUsuarioResponsavel(Usuario usuario) {
-        getUsuarios().add(usuario);
+    public void adicionarUsuarioResponsavel(Usuario usuarioResposavel) {
+        getUsuarioResposavel().add(usuarioResposavel);
     }
 
-    public void removerUsuarioResponsavel(Usuario usuario) {
-        getUsuarios().remove(usuario);
+    public void removerUsuarioResponsavel(Usuario usuarioResposavel) {
+        getUsuarioResposavel().remove(usuarioResposavel);
     }
 
     public boolean aceitarFormaPagamento(FormaPagamento formaPagamento) {
